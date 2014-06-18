@@ -600,6 +600,8 @@ intel_update_avc_frame_store_index(
             continue;
 
         GenAvcSurface * const avc_surface = obj_surface->private_data;
+        if (!avc_surface)
+            continue;
         if (avc_surface->frame_store_id >= 0) {
             GenFrameStore * const fs =
                 &frame_store[avc_surface->frame_store_id];
@@ -633,6 +635,8 @@ intel_update_avc_frame_store_index(
             continue;
 
         GenAvcSurface * const avc_surface = obj_surface->private_data;
+        if (!avc_surface)
+            continue;
         if (n < num_free_refs) {
             GenFrameStore * const fs = free_refs[n++];
             fs->surface_id = obj_surface->base.id;
