@@ -911,7 +911,7 @@ void hsw_veb_resource_prepare(VADriverContextP ctx,
     proc_ctx->fourcc_output = output_fourcc;
    
     /* create pipeline surfaces */
-    for(i = 0; i < FRAME_STORE_SUM; i ++) {
+    for(i = 0; i < ARRAY_ELEMS(proc_ctx->frame_store); i ++) {
         if(proc_ctx->frame_store[i].obj_surface){
             continue; //refer external surface for vebox pipeline
         }
@@ -1377,7 +1377,7 @@ void gen75_vebox_context_destroy(VADriverContextP ctx,
        proc_ctx->surface_output_scaled_object = NULL;
      }
 
-    for(i = 0; i < FRAME_STORE_SUM; i ++) {
+    for(i = 0; i < ARRAY_ELEMS(proc_ctx->frame_store); i ++) {
         if (proc_ctx->frame_store[i].is_internal_surface == 1) {
             assert(proc_ctx->frame_store[i].surface_id != VA_INVALID_ID);
 
@@ -1418,13 +1418,9 @@ struct intel_vebox_context * gen75_vebox_context_init(VADriverContextP ctx)
     int i;
 
     proc_context->batch = intel_batchbuffer_new(intel, I915_EXEC_VEBOX, 0);
-    memset(proc_context->frame_store, 0, sizeof(VEBFrameStore)*FRAME_STORE_SUM);
 
-    for (i = 0; i < FRAME_STORE_SUM; i ++) {
+    for (i = 0; i < ARRAY_ELEMS(proc_context->frame_store); i++)
         proc_context->frame_store[i].surface_id = VA_INVALID_ID;
-        proc_context->frame_store[i].is_internal_surface = 0;
-        proc_context->frame_store[i].obj_surface = NULL;
-    }
   
     proc_context->filters_mask          = 0;
     proc_context->frame_order           = -1; /* the first frame */
@@ -1469,7 +1465,7 @@ void bdw_veb_state_command(VADriverContextP ctx, struct intel_vebox_context *pro
 
         if ((di_param->algorithm == VAProcDeinterlacingMotionAdaptive ||
             di_param->algorithm == VAProcDeinterlacingMotionCompensated) &&
-            proc_ctx->frame_order != -1)
+            (1||proc_ctx->frame_order != -1))
             di_output_frames_flag = 0; /* Output both Current Frame and Previous Frame */
     }
 
