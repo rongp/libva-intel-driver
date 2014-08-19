@@ -1,3 +1,15 @@
+intel-vaapi-driver (1.3.3~pre4-1~trusty) trusty; urgency=medium
+
+  * Fix memory leak with state table (fixes advanced deinterlacing)
+
+ -- wsnipex <wsnipex@a1.net>  Wed, 26 Aug 2014 18:22:31 +0200
+
+intel-vaapi-driver (1.3.3~pre2-1~trusty) trusty; urgency=medium
+
+  * Base on gwenoles vebox rewrite
+
+ -- wsnipex <wsnipex@a1.net>  Wed, 19 Aug 2014 20:32:37 +0200
+
 intel-vaapi-driver (1.3.3~pre1-3~trusty) trusty; urgency=medium
 
   * [PATCH] decoder: h264: fix RefPicList0/1 without frame in DPB
