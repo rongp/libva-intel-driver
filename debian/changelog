@@ -1,3 +1,9 @@
+intel-vaapi-driver (1.5.1~pre1-2~trusty) trusty; urgency=medium
+
+  * add field_rate workaround for Gen7 (Andy Furniss)
+
+ -- wsnipex <wsnipex@a1.net>  Fri, 08 Mai 2015 07:54:01 +0100
+
 intel-vaapi-driver (1.5.1~pre1-1~trusty) trusty; urgency=medium
 
   * fix segfault due to store buffer being unallocated
